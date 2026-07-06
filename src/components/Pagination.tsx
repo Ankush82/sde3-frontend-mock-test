@@ -17,9 +17,15 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
         Prev
       </button>
 
-      <span>
-        Page {page} of {totalPages}
-      </span>
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+        <button
+          key={n}
+          aria-current={n === page ? "page" : undefined}
+          onClick={() => onPageChange(n)}
+        >
+          {n}
+        </button>
+      ))}
 
       <button disabled={page >= totalPages} onClick={() => onPageChange(page + 1)}>
         Next

@@ -11,6 +11,8 @@ export function useDebouncedValue<T>(value: T, delayMs: number): T {
     const timer = setTimeout(() => {
       setDebounced(value);
     }, delayMs);
+
+    return () => clearTimeout(timer);
   }, [value, delayMs]);
 
   return debounced;

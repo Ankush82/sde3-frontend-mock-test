@@ -15,7 +15,19 @@ interface ProductListProps {
  * - if not loading, no error, and `products` is empty, render a "No products found" message
  * - otherwise render a ProductCard for each product
  */
-export function ProductList({ products, onSelect }: ProductListProps) {
+export function ProductList({ products, loading, error, onSelect }: ProductListProps) {
+  if (loading) {
+    return <p role="status">Loading products...</p>;
+  }
+
+  if (error) {
+    return <p role="alert">{error}</p>;
+  }
+
+  if (products.length === 0) {
+    return <p>No products found</p>;
+  }
+
   return (
     <div className="product-list">
       {products.map((product) => (

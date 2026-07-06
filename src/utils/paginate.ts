@@ -4,7 +4,7 @@
  */
 export function paginate<T>(items: T[], page: number, pageSize: number): T[] {
   const start = (page - 1) * pageSize;
-  const end = start + pageSize - 1;
+  const end = start + pageSize;
   return items.slice(start, end);
 }
 
@@ -13,5 +13,5 @@ export function paginate<T>(items: T[], page: number, pageSize: number): T[] {
  * `pageSize` items per page. Must return at least 1, even when totalItems is 0.
  */
 export function getTotalPages(totalItems: number, pageSize: number): number {
-  throw new Error("getTotalPages is not implemented yet");
+  return Math.max(1, Math.ceil(totalItems / pageSize));
 }

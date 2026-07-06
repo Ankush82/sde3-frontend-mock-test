@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { Product } from "../types/product";
 
 interface ProductDetailModalProps {
@@ -12,11 +13,22 @@ interface ProductDetailModalProps {
  * - Clicking inside the modal card itself must NOT close it.
  */
 export function ProductDetailModal({ product, onClose }: ProductDetailModalProps) {
+  useEffect(() => {
+    if (!product) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [product, onClose]);
+
   if (!product) return null;
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal-card">
+      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
         <h2>{product.name}</h2>
         <p>Category: {product.category}</p>
         <p>Price: ₹{product.price.toLocaleString("en-IN")}</p>

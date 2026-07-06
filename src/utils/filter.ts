@@ -8,8 +8,9 @@ import type { Filters, Product } from "../types/product";
  */
 export function filterProducts(products: Product[], filters: Filters): Product[] {
   return products.filter((p) => {
-    const matchesSearch = p.name.includes(filters.search);
+    const matchesSearch = p.name.toLowerCase().includes(filters.search.toLowerCase());
     const matchesCategory = filters.category === "all" || p.category === filters.category;
-    return matchesSearch && matchesCategory;
+    const matchesStock = !filters.inStockOnly || p.inStock;
+    return matchesSearch && matchesCategory && matchesStock;
   });
 }

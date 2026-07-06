@@ -39,16 +39,26 @@ export function useProducts(
 
   useEffect(() => {
     setLoading(true);
-    fetchProducts(shouldFail).then((products) => {
-      setAllProducts(products);
-      setLoading(false);
-    });
+    setError(null);
+    fetchProducts(shouldFail)
+      .then((products) => {
+        setAllProducts(products);
+        setLoading(false);
+      })
+      .catch((err: Error) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, [shouldFail]);
 
   const filtered = useMemo(() => filterProducts(allProducts, filters), [allProducts, filters]);
   const sorted = useMemo(() => sortProducts(filtered, sort), [filtered, sort]);
   const totalPages = getTotalPages(sorted.length, PAGE_SIZE);
   const paged = paginate(sorted, page, PAGE_SIZE);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filters, sort]);
 
   const allCategories = useMemo(
     () => Array.from(new Set(allProducts.map((p) => p.category))).sort(),
