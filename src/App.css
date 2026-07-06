@@ -1,0 +1,81 @@
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: system-ui, sans-serif;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.filter-panel {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+  min-height: 120px;
+}
+
+.product-card {
+  text-align: left;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  background: white;
+}
+
+.product-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.product-card p {
+  margin: 2px 0;
+  font-size: 13px;
+}
+
+.out-of-stock {
+  color: #c0392b;
+  font-weight: 600;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pagination button[aria-current="page"] {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-card {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  min-width: 280px;
+}
